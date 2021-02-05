@@ -1,0 +1,42 @@
+.app {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #0e1628;
+}
+
+.app iframe {
+  border: none;
+  outline: none;
+  flex: 0 0 calc(100vh - 4rem);
+  width: 100%;
+}
+
+.app .input-wrapper {
+  flex: 0 0 4rem;
+  display: flex;
+  align-items: center;
+  background-color: #0e1628;
+}
+
+.input-wrapper input {
+  border: none;
+  outline: none;
+  background-color: #0e1628;
+  padding: 0.75rem 1rem;
+  font-size: 1.25rem;
+  width: 100%;
+  color: #fff;
+}
+
+/*
+  <main class="app">
+    <iframe src="https://blog.repl.it/__logs"></iframe>
+    <div class="input-wrapper">
+      <input placeholder="Message repl.it" autocomplete="off" spellcheck="off"/>
+    </div>
+  </main>
+*/
