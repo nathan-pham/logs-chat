@@ -1,17 +1,17 @@
 import colorize from "./color.js"
 
 const table = {
-  "/shrug": "**¯\\_(ツ)_/¯**",
+  "/shrug": "**¯**\\_(ツ)_/**¯**",
   "/tableflip":"(╯°□°）╯︵ ┻━┻",
   "/unflip": "┬─┬ ノ( ゜-゜ノ)" 
 }
 
 const markdown = msg => {
-  const bold = /\*\*(.*)\*\*/gim
-  const hidden = /\|\|(.*)\|\|/gim
-  const italics = /\*(.*)\*/gim
-  const strikethrough = /\~\~(.*)\~\~/gim
-
+  const bold = /\*\*(.*?)\*\*/gim
+  const ping = /@(.*?) /gim
+  const hidden = /\|\|(.*?)\|\|/gim
+  const italics = /\*(.*?)\*/gim
+  const strikethrough = /\~\~(.*?)\~\~/gim
   let content = msg
 
   for(const [key, value] of Object.entries(table)) {
@@ -21,6 +21,12 @@ const markdown = msg => {
   content = content
     .replace(bold, "[1m$1[22m")
     .replace(italics, "[3m$1[23m")
+
+  let pMatches = content.split(' ').forEach(word => {
+    if(word.startsWith("@")) {
+      content = content.replace(word, colorize("color:blue", word))
+    }
+  })
 
   let sMatches = content.match(strikethrough) || []
   sMatches.forEach(match => {
