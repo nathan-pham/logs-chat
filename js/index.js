@@ -6,6 +6,10 @@ const { base, user } = config
 const roles = generateRoles()
 const input = document.getElementById("input")
 
+const emoji = new EmojiConvertor()
+emoji.replace_mode = "unified"
+emoji.allow_native = true
+
 const name = `${ roles } ${ colorize("color:yellow", user.name) }`
 const removeGET = "\r\u0008\u0008    \n"
 
@@ -16,8 +20,8 @@ const sendMessage = (e) => {
       fetch(`${ config.base }/${ encodeURIComponent(
         `${ removeGET }
 ╔\n
-║ ${ name } said at ${ time() } \n
-║ ${ markdown(message) } \n
+║ ${ time() } \n
+║ ${ name } said: ${ markdown(emoji.replace_colons(message)) }
 ╚\n`
       )}`)
       input.value = ""
@@ -43,7 +47,7 @@ function time() {
 		date = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0'),
 		time = String(today.getHours()).padStart(2, '0') + ":" + String(today.getMinutes()).padStart(2, '0') + ":" + String(today.getSeconds()).padStart(2, '0')
 
-	return `${date} ${time}:`
+	return `${date} ${time}`
 }
 
 input.addEventListener("keydown", sendMessage)
@@ -57,22 +61,3 @@ window.onbeforeunload = () => {
 fetch(`${ config.base }/${ encodeURIComponent(
   `${ removeGET } \n${ name } has joined the chat!`
 )}`)
-/*
-export const config = {
-  base: "https://blog.repl.",
-  user: {
-    name: "Nathaniel#6988",
-    roles: [
-      { 
-        name: "Hacker",
-        color: "foreground:red"
-      },
-      {
-        name: "Content Creator",
-        color: "foreground:yellow"
-      }
-    ]
-  }
-}
- */
-// console.log(colorize("background:red", "test"))
