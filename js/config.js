@@ -5,12 +5,8 @@ const config = {
     roles: [
       { 
         name: "Hacker",
-        color: "background:red"
+        color: "color:red"
       },
-      {
-        name: "Content Creator",
-        color: "background:yellow"
-      }
     ]
   }
 }
