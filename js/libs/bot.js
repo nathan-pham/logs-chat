@@ -22,17 +22,16 @@ class Bot {
 ║ ${ time() } \n
 ${ generateMessage(text) }
 ╚\n`
-    console.log(decodeURIComponent(encodeURIComponent(message)))
     fetch(`${ config.base }/${ encodeURIComponent(message)}`)
   }
   parseCommand(message) {
     message = message.trim()
     if(message.startsWith(this.prefix)) {
       let args = message.substring(this.prefix.length).split(' ')
-      const command = args.pop()
+      const command = args.shift()
       if(this.commands.hasOwnProperty(command)) {
         const binded = this.commands[command].bind(this)
-        binded(args.join(' '))
+        binded(...args)
       }
     }
     return message
@@ -40,9 +39,13 @@ ${ generateMessage(text) }
 }
 
 const bot = new Bot("r-", {
-  "pong": function(args) {
-    this.sendMessage("ping")
-  } 
+  "ping": function() {
+    this.sendMessage("pong")
+  },
+  "nick": function(name) {
+    localStorage.setItem("nickname", name)
+    this.sendMessage(`Set nickname to ${ name }`)
+  }
 })
 
 export default bot

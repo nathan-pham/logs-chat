@@ -11,6 +11,7 @@ const markdown = msg => {
   const ping = /@(.*?) /gim
   const hidden = /\|\|(.*?)\|\|/gim
   const italics = /\*(.*?)\*/gim
+  const underline = /__(.*?)__/gim
   const strikethrough = /\~\~(.*?)\~\~/gim
   let content = msg
 
@@ -21,6 +22,7 @@ const markdown = msg => {
   content = content
     .replace(bold, "[1m$1[22m")
     .replace(italics, "[3m$1[23m")
+    .replace(underline, "[4m$1[24m")
 
   let pMatches = content.split(' ').forEach(word => {
     if(word.startsWith("@")) {

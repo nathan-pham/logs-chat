@@ -11,11 +11,20 @@ const emoji = new EmojiConvertor()
 emoji.replace_mode = "unified"
 emoji.allow_native = true
 
-const name = `${ roles } ${ colorize("color:yellow", user.name) }`
+const generateName = () => {
+  let nick = localStorage.getItem("nickname")
+  nick = nick == "NONE" ? false : nick
+
+  let name = `${ roles } ${ colorize("color:yellow", nick || user.name) }`
+
+  return name
+}
 
 const sendMessage = (e) => {
   if(e.key == "Enter") {
     let message = input.value
+    let name = generateName()
+
     if(message.length) {
       fetch(`${ config.base }/${ encodeURIComponent(
         `${ removeGET }
@@ -34,10 +43,10 @@ input.addEventListener("keydown", sendMessage)
 
 window.onbeforeunload = () => {
   fetch(`${ config.base }/${ encodeURIComponent(
-    `${ removeGET } \n${ name } left the chat!`
+    `${ removeGET } \n${ generateName() } left the chat!`
   )}`)
 }
 
 fetch(`${ config.base }/${ encodeURIComponent(
-  `${ removeGET } \n${ name } has joined the chat!`
+  `${ removeGET } \n${ generateName() } has joined the chat!`
 )}`)

@@ -6,7 +6,7 @@ const config = {
       { 
         name: "Hacker",
         color: "color:red"
-      },
+      }
     ]
   }
 }
