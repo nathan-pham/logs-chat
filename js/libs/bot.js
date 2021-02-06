@@ -25,7 +25,6 @@ ${ generateMessage(text) }
     fetch(`${ config.base }/${ encodeURIComponent(message)}`)
   }
   parseCommand(message) {
-    message = message.trim()
     if(message.startsWith(this.prefix)) {
       let args = message.substring(this.prefix.length).split(' ')
       const command = args.shift()
@@ -45,6 +44,13 @@ const bot = new Bot("r-", {
   "nick": function(name) {
     localStorage.setItem("nickname", name)
     this.sendMessage(`Set nickname to ${ name }`)
+  },
+  "list": function() {
+    let message = "A list of all commands includes: \n"
+    for(const key in bot.commands) {
+      message += `${key}\n`
+    }
+    this.sendMessage(message.trimEnd())
   }
 })
 
