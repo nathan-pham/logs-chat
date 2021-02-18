@@ -1,4 +1,5 @@
 # replit-blog-chat
+An implementation of a __logs client for replit. Unfortunately, requests no longer log to the console so this chat application will not work. 
 
 ## proposed-standard (REPLITCHAT_V1)
 
@@ -26,15 +27,6 @@ parsing precedence
 ### room 
 defaults to "global"
 technically all rooms are public
-
-### psuedo implemenation
-```js
-let message = [received]
-if(message.startsWith("GET")) {
-  message = message.substring(4)
-  const [ key ]
-}
-```
 
 ## commands
 default prefix !
