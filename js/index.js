@@ -32,7 +32,7 @@ const sendMessage = (e) => {
 ║ ${ time() } \n
 ║ ${ name } said: ${ markdown(emoji.replace_colons(message)) }
 ╚\n`
-      )}`)
+      )}`, { mode: "no-cors" })
       input.value = ""
       bot.parseCommand(message)
     }
